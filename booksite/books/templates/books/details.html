@@ -1,0 +1,13 @@
+{% extends 'books/base.html' %}
+
+{% block body %}
+    <div class="home">
+        <img class="card" height="150px" src="{{book.image}}"/>
+        <h1>{{book.name}}</h1>
+        <h3>{{book.author}}</h3>
+        <h5>Goodreads rating: {{book.rating}}</h5>
+        <h5>Genres: {{book.category}}</h5>
+        <p>{{book.description}}</p>
+
+    </div>
+{% endblock %}

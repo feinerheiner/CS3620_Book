@@ -1,0 +1,37 @@
+{% extends 'books/base.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="search-container">
+        <form action="" method="GET" >
+            <input type="search" name="book_name">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <div>
+        {% for book in book_object %}
+            <a type="button" class="btn btn-light" href="{% url 'detail' book.id %}" style="margin: 3px 0">{{ book.name }}</a>
+            <br>
+        {% endfor %}
+    </div>
+    <ul class="pagination pagination-sm justify-content-center" style="margin: 20px 0">
+        {% if book_object.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ book_object.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        {% for page_number in book_object.paginator.page_range %}
+            {% if book_object.number == page_number %}
+                <li class="page-item active"><span class="page-link">{{ page_number }}</span></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if book_object.has_next %}
+            <li class="page-item"><a class="page-link" href="?page= {{ book_object.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ book_object.paginator.num_pages }}">Last</a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}
